@@ -14,7 +14,11 @@ contract OurTokenTest is Test {
     address alice = makeAddr("alice");
 
     event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 
     function setUp() public {
         deployer = new DeployOurToken();
@@ -72,7 +76,10 @@ contract OurTokenTest is Test {
 
         assertEq(ourToken.balanceOf(alice), transferAmount);
         assertEq(ourToken.balanceOf(bob), STARTING_BALANCE - transferAmount);
-        assertEq(ourToken.allowance(bob, alice), allowanceAmount - transferAmount);
+        assertEq(
+            ourToken.allowance(bob, alice),
+            allowanceAmount - transferAmount
+        );
     }
 
     function testCannotTransferFromWithoutApproval() external {
@@ -102,7 +109,10 @@ contract OurTokenTest is Test {
 
     function testTotalSupplyConstant() external {
         uint256 expectedTotal = ourToken.totalSupply();
-        assertEq(expectedTotal, ourToken.balanceOf(msg.sender) + ourToken.balanceOf(bob));
+        assertEq(
+            expectedTotal,
+            ourToken.balanceOf(msg.sender) + ourToken.balanceOf(bob)
+        );
     }
 
     /*//////////////////////////////////////////////////////////////
